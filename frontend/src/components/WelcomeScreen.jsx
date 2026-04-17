@@ -19,29 +19,10 @@ export default function WelcomeScreen({ setQuery }) {
     >
       <div className="w-full max-w-2xl mx-auto pointer-events-auto">
         {/* Responsive Chip Grid */}
-        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-          {suggestions.map((s) => (
-            <button
-              key={s}
-              onClick={() => setQuery(s)}
-              className="
-                w-full sm:w-auto        /* Mobile pe full width, tablet+ pe auto width */
-                px-6 py-3.5 
-                rounded-2xl 
-                border border-slate-800/60 
-                bg-[#161922]/40 
-                text-[13px] md:text-[14px] 
-                text-slate-400 
-                hover:border-cyan-500/40 
-                hover:text-cyan-400 
-                hover:bg-cyan-500/5 
-                hover:shadow-[0_0_20px_rgba(6,182,212,0.05)]
-                transition-all duration-300 
-                active:scale-95 
-                backdrop-blur-md
-              "
-            >
-              {s}
+        <div className="flex flex-col gap-3 w-full max-w-md mx-auto px-4 mt-10">
+          {["Latest treatments...", "Clinical trials..."].map((text) => (
+            <button className="w-full py-4 px-6 rounded-2xl bg-white/5 border border-white/10 text-slate-300 text-sm md:text-base hover:bg-white/10 transition-all text-left">
+              {text}
             </button>
           ))}
         </div>
