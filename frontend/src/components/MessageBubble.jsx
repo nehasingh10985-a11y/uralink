@@ -161,7 +161,7 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
 
   if (msg.role === "user") {
     return (
-      <div className="flex justify-end px-4 mb-6">
+      <div className="flex justify-end px-4 mb-4">
         <div className="bg-[#1e3a5f] text-slate-100 px-5 py-3 rounded-2xl rounded-tr-sm text-[14px] max-w-[75%] border border-blue-500/20 shadow-lg">
           {msg.text}
         </div>
@@ -174,39 +174,7 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
   const hasTrials = msg.clinicalTrials?.length > 0;
 
   return (
-    <div className="flex flex-col gap-10 px-4 py-6 animate-in fade-in duration-700">
-      {/* A. Top Stats */}
-      {hasPubs && (
-        <div className="flex flex-wrap items-center gap-8 py-5 px-6 bg-[#0d1117] border border-white/[0.05] rounded-2xl shadow-xl">
-          <div className="flex flex-col">
-            <span className="text-2xl font-black text-white">
-              {stats.count}
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-              Publications
-            </span>
-          </div>
-          <div className="hidden md:block w-px h-10 bg-white/10" />
-          <div className="flex flex-col">
-            <span className="text-2xl font-black text-emerald-400">
-              {stats.trialCount}
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-              Investigations
-            </span>
-          </div>
-          <div className="hidden md:block w-px h-10 bg-white/10" />
-          <div className="flex flex-col">
-            <span className="text-2xl font-black text-cyan-400">
-              {stats.years}
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-              Years Covered
-            </span>
-          </div>
-        </div>
-      )}
-
+    <div className="flex flex-col gap-10 px-4 py-5 animate-in fade-in duration-700">
       {/* B. Research Summary & Gap Analyzer */}
       {hasPubs && (
         <div className="space-y-6">
