@@ -5,7 +5,8 @@ const Header = memo(({ onToggleWorkbench, savedCount }) => {
   console.log("Header Rendered"); // Check karne ke liye ki typing par ye render nahi ho raha
 
   return (
-    <div className="bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/5 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <div className="bg-[#0f172a]/80 backdrop-blur-xl border-b border-white/5 px-4 md:px-6 py-3 md:py-4 flex items-center justify-between sticky top-0 z-[100] w-full">
+      {" "}
       {/* 1. Left Section: Identity */}
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-500/20 flex items-center justify-center shadow-lg shadow-cyan-500/5">
@@ -20,7 +21,6 @@ const Header = memo(({ onToggleWorkbench, savedCount }) => {
           </span>
         </div>
       </div>
-
       {/* 2. Right Section: Workbench & Stats */}
       <div className="flex items-center gap-4">
         {/* Workbench Toggle Button */}
