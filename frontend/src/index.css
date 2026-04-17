@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* Sabse powerful tarika scrollbar hatane ka */
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+* {
+    -ms-overflow-style: none !important;
+    /* IE/Edge */
+    scrollbar-width: none !important;
+    /* Firefox */
+}
+
+/* Page ko hilne se rokne ke liye */
+html,
+body {
+    overflow: hidden !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
