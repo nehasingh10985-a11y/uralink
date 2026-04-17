@@ -1,6 +1,5 @@
 import React from "react";
 
-// Icons remain the same...
 const LocationIcon = () => (
   <svg
     className="w-3.5 h-3.5"
@@ -32,16 +31,12 @@ export default function TrialCard({ trial }) {
     ? `https://clinicaltrials.gov/study/${nctId}`
     : `https://clinicaltrials.gov/search?term=${encodeURIComponent(trial.title)}`;
 
-  // --- Smart Logic for Empty Data ---
-  // Agar Phase nahi hai toh status ke basis par guess karo ya "Pilot Study" dikhao
   const displayPhase =
     trial.phase && trial.phase !== "N/A"
       ? trial.phase
       : status.includes("recruiting")
         ? "Early Phase"
         : "Not Disclosed";
-
-  // Agar Enrollment count nahi hai toh "Calculating" ya "Pending" dikhao
   const displayEnrollment =
     trial.enrollment && trial.enrollment !== "0"
       ? `${trial.enrollment} Participants`
@@ -49,10 +44,10 @@ export default function TrialCard({ trial }) {
 
   return (
     <div className="group bg-[#0d1117] border border-white/[0.06] hover:border-emerald-500/40 hover:bg-[#121820] rounded-2xl flex flex-col transition-all duration-300 overflow-hidden shadow-xl h-full">
-      {/* Header */}
-      <div className="p-4 md:p-5 pb-0 flex items-start justify-between gap-4">
+      {/* Header - Mobile friendly padding */}
+      <div className="p-4 md:p-5 pb-2 flex items-center justify-between gap-2">
         <div
-          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[9px] md:text-[10px] font-black uppercase tracking-widest ${
+          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[8px] md:text-[10px] font-black uppercase tracking-widest ${
             isRecruiting
               ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
               : "bg-slate-500/10 text-slate-400 border-slate-500/20"
@@ -63,48 +58,44 @@ export default function TrialCard({ trial }) {
           />
           {trial.status || "Status Pending"}
         </div>
-        <span className="text-[9px] md:text-[10px] font-mono text-slate-600 font-bold">
+        <span className="text-[8px] md:text-[10px] font-mono text-slate-600 font-bold shrink-0">
           {nctId || "N/A"}
         </span>
       </div>
 
       {/* Main Content */}
-      <div className="p-4 md:p-5 space-y-4">
-        <h4 className="text-slate-100 text-[14px] md:text-[15px] font-bold leading-snug line-clamp-2 min-h-[40px] group-hover:text-emerald-50 transition-colors">
+      <div className="px-4 md:px-5 pb-4 space-y-4">
+        <h4 className="text-slate-100 text-[14px] md:text-[16px] font-bold leading-snug line-clamp-2 min-h-[40px] group-hover:text-emerald-50 transition-colors">
           {trial.title}
         </h4>
 
-        {/* Clinical Specs Grid */}
+        {/* Clinical Specs Grid - Mobile: Stack if tiny, Tablet: side-by-side */}
         <div className="grid grid-cols-2 gap-2 md:gap-3">
-          <div className="bg-white/[0.02] border border-white/[0.04] p-3 rounded-xl hover:bg-white/[0.04] transition-colors">
-            <p className="text-[8px] md:text-[9px] text-slate-600 uppercase font-black mb-1 tracking-wider">
+          <div className="bg-white/[0.02] border border-white/[0.04] p-2.5 md:p-3 rounded-xl">
+            <p className="text-[7px] md:text-[9px] text-slate-600 uppercase font-black mb-1 tracking-wider">
               Phase
             </p>
-            <p
-              className={`text-[11px] md:text-xs font-bold ${trial.phase ? "text-slate-200" : "text-slate-500 italic"}`}
-            >
+            <p className="text-[10px] md:text-xs font-bold text-slate-200 truncate">
               {displayPhase}
             </p>
           </div>
-          <div className="bg-white/[0.02] border border-white/[0.04] p-3 rounded-xl hover:bg-white/[0.04] transition-colors">
-            <p className="text-[8px] md:text-[9px] text-slate-600 uppercase font-black mb-1 tracking-wider">
+          <div className="bg-white/[0.02] border border-white/[0.04] p-2.5 md:p-3 rounded-xl">
+            <p className="text-[7px] md:text-[9px] text-slate-600 uppercase font-black mb-1 tracking-wider">
               Enrollment
             </p>
-            <p
-              className={`text-[11px] md:text-xs font-bold ${trial.enrollment ? "text-slate-200" : "text-slate-500 italic"}`}
-            >
+            <p className="text-[10px] md:text-xs font-bold text-slate-200 truncate">
               {displayEnrollment}
             </p>
           </div>
         </div>
 
-        {/* Summary (Optional) */}
+        {/* Condition Tag - Hidden on very small screens to save space */}
         {trial.conditions && (
-          <div className="flex flex-wrap gap-1.5">
+          <div className="hidden sm:flex flex-wrap gap-1.5">
             {trial.conditions.slice(0, 1).map((c, i) => (
               <span
                 key={i}
-                className="text-[9px] md:text-[10px] text-slate-500 bg-white/5 px-2 py-0.5 rounded border border-white/5 truncate max-w-full"
+                className="text-[9px] text-slate-500 bg-white/5 px-2 py-0.5 rounded border border-white/5 truncate max-w-full"
               >
                 Condition: {c}
               </span>
@@ -113,29 +104,31 @@ export default function TrialCard({ trial }) {
         )}
       </div>
 
+      {/* Spacer to push footer down */}
       <div className="flex-1" />
 
-      {/* Footer */}
-      <div className="px-4 md:px-5 py-4 bg-black/20 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto">
-          <div className="p-1.5 bg-white/5 rounded-lg text-slate-500">
+      {/* Footer - Stacked on Mobile, Row on Desktop */}
+      <div className="px-4 py-4 md:p-5 bg-black/20 border-t border-white/[0.04] flex flex-col xs:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3 w-full xs:w-auto">
+          <div className="p-2 bg-white/5 rounded-lg text-slate-500 shrink-0">
             <LocationIcon />
           </div>
           <div className="min-w-0">
-            <p className="text-[8px] md:text-[9px] text-slate-600 uppercase font-black mb-0.5">
+            <p className="text-[7px] md:text-[9px] text-slate-600 uppercase font-black">
               Sponsor
             </p>
-            <p className="text-[11px] text-slate-400 font-medium truncate max-w-[140px]">
-              {trial.sponsor || "Private Researcher"}
+            <p className="text-[11px] text-slate-400 font-medium truncate max-w-[120px] md:max-w-[140px]">
+              {trial.sponsor || "Researcher"}
             </p>
           </div>
         </div>
 
+        {/* Full-width button on mobile */}
         <a
           href={trialUrl}
           target="_blank"
           rel="noreferrer"
-          className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-500 text-black text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-400 transition-all active:scale-95 shadow-lg shadow-emerald-900/30"
+          className="w-full xs:w-auto text-center px-6 py-3 bg-emerald-500 text-black text-[10px] md:text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-400 transition-all active:scale-95 shadow-lg shadow-emerald-900/30 whitespace-nowrap"
         >
           Study Details
         </a>

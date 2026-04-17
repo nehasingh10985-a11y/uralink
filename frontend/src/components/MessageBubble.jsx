@@ -5,7 +5,7 @@ import TrialCard from "./TrialCard";
 import ErrorCard from "./ErrorCard";
 import ResearchTimeline from "./ResearchTimeline";
 
-// --- 1. Sub-Component: Research Summary (Responsive Grid) ---
+// --- 1. Sub-Component: Research Summary (Responsive) ---
 const ResearchSummary = ({ publications }) => {
   const summaryData = useMemo(() => {
     if (!publications || publications.length === 0) return null;
@@ -33,12 +33,13 @@ const ResearchSummary = ({ publications }) => {
 
   return (
     <div className="bg-gradient-to-br from-[#0d1117] to-[#161b22] border border-cyan-500/20 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-2xl relative overflow-hidden">
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 blur-[50px] rounded-full pointer-events-none" />
       <h3 className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-cyan-400 font-black mb-4 md:mb-6 flex items-center gap-2">
-        <span className="w-4 h-[1px] bg-cyan-500/50" />
+        <span className="w-3 md:w-4 h-[1px] bg-cyan-500/50" />
         Executive Research Summary
       </h3>
       {/* Mobile: 1 column, Desktop: 3 columns */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         <div className="space-y-1">
           <p className="text-slate-500 text-[10px] md:text-[11px] font-bold uppercase tracking-tighter">
             Primary Source
@@ -56,7 +57,8 @@ const ResearchSummary = ({ publications }) => {
             Avg.{" "}
             <span className="text-cyan-400">
               {summaryData.avgCitations} citations
-            </span>
+            </span>{" "}
+            per pub.
           </p>
         </div>
         <div className="space-y-1 md:border-l md:border-white/5 md:pl-6">
@@ -64,7 +66,8 @@ const ResearchSummary = ({ publications }) => {
             Data Recency
           </p>
           <p className="text-slate-200 text-xs md:text-sm font-semibold">
-            Up to <span className="text-white">{summaryData.latestYear}</span>
+            Integrated up to{" "}
+            <span className="text-white">{summaryData.latestYear}</span>.
           </p>
         </div>
       </div>
@@ -72,11 +75,12 @@ const ResearchSummary = ({ publications }) => {
   );
 };
 
-// --- 2. Sub-Component: Research Gap Analyzer (Responsive Grid) ---
+// --- 2. Sub-Component: Research Gap Analyzer (Responsive) ---
 const ResearchGapAnalyzer = ({ analysisText }) => {
   if (!analysisText || analysisText.length < 50) return null;
   return (
     <div className="relative group overflow-hidden bg-[#0d1117] border border-amber-500/20 rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-7 shadow-2xl">
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
       <div className="flex flex-col md:flex-row items-start gap-4 md:gap-5">
         <div className="p-3 bg-amber-500/10 rounded-2xl flex-shrink-0">
           <svg
@@ -94,23 +98,23 @@ const ResearchGapAnalyzer = ({ analysisText }) => {
           </svg>
         </div>
         <div className="space-y-4 w-full">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+          <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-amber-500 font-black">
+              <h3 className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-amber-500 font-black">
                 Strategic Intelligence
               </h3>
-              <p className="text-slate-100 text-base md:text-lg font-bold mt-1">
+              <p className="text-slate-100 text-base md:text-lg font-bold mt-1 tracking-tight">
                 Identified Research Gaps
               </p>
             </div>
-            <span className="w-fit px-2 py-0.5 bg-amber-500/5 border border-amber-500/20 rounded-full text-[8px] text-amber-500 font-bold uppercase">
+            <span className="hidden sm:block px-3 py-1 bg-amber-500/5 border border-amber-500/20 rounded-full text-[8px] md:text-[9px] text-amber-500 font-bold uppercase">
               Experimental
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 pt-2">
             <div className="space-y-2">
-              <p className="text-[9px] uppercase text-slate-500 font-bold tracking-widest flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />{" "}
+              <p className="text-[9px] md:text-[10px] uppercase text-slate-500 font-bold tracking-widest flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" /> Field
                 Limitations
               </p>
               <div className="text-slate-400 text-[12px] md:text-[13px] leading-relaxed italic border-l-2 border-amber-500/20 pl-4 py-1">
@@ -118,12 +122,12 @@ const ResearchGapAnalyzer = ({ analysisText }) => {
               </div>
             </div>
             <div className="space-y-2">
-              <p className="text-[9px] uppercase text-slate-500 font-bold tracking-widest flex items-center gap-2">
+              <p className="text-[9px] md:text-[10px] uppercase text-slate-500 font-bold tracking-widest flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />{" "}
-                Future
+                Future Trajectory
               </p>
               <div className="text-slate-400 text-[12px] md:text-[13px] leading-relaxed border-l-2 border-emerald-500/20 pl-4 py-1">
-                Precision medicine transition for 2026-2027.
+                Transitioning towards precision medicine for 2026.
               </div>
             </div>
           </div>
@@ -136,8 +140,8 @@ const ResearchGapAnalyzer = ({ analysisText }) => {
 export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
   if (msg.role === "user") {
     return (
-      <div className="flex justify-end px-2 md:px-4 mb-6">
-        <div className="bg-[#1e3a5f] text-slate-100 px-4 py-3 rounded-2xl rounded-tr-sm text-[13px] md:text-[14px] max-w-[90%] md:max-w-[75%] border border-blue-500/20 shadow-lg">
+      <div className="flex justify-end px-3 md:px-4 mb-4">
+        <div className="bg-[#1e3a5f] text-slate-100 px-4 md:px-5 py-2 md:py-3 rounded-2xl rounded-tr-sm text-[13px] md:text-[14px] max-w-[85%] md:max-w-[75%] border border-blue-500/20 shadow-lg">
           {msg.text}
         </div>
       </div>
@@ -149,7 +153,7 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
   const hasTrials = msg.clinicalTrials?.length > 0;
 
   return (
-    <div className="flex flex-col gap-6 md:gap-10 px-2 md:px-4 py-4 md:py-5 animate-in fade-in duration-700">
+    <div className="flex flex-col gap-6 md:gap-10 px-3 md:px-4 py-3 md:py-5 animate-in fade-in duration-700">
       {/* B. Research Summary & Gap Analyzer */}
       {hasPubs && (
         <div className="space-y-4 md:space-y-6">
@@ -158,9 +162,9 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
         </div>
       )}
 
-      {/* C. Timeline (Horizontal Scroll on mobile or hidden) */}
+      {/* C. Timeline (Responsive Padding) */}
       {hasPubs && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start bg-[#0d1117]/50 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/[0.03]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start bg-[#0d1117]/50 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/[0.03]">
           <div className="lg:col-span-3 space-y-1">
             <p className="text-[9px] md:text-[10px] uppercase tracking-widest text-slate-400 font-black">
               Temporal Analysis
@@ -170,12 +174,14 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
             </p>
           </div>
           <div className="lg:col-span-9 overflow-x-auto">
+            {" "}
+            {/* Added scroll for tight screens */}
             <ResearchTimeline publications={msg.publications} />
           </div>
         </div>
       )}
 
-      {/* D. Evidence Library - Responsive Cards */}
+      {/* D. Evidence Library - Grid Fix */}
       {hasPubs && (
         <div className="space-y-4 md:space-y-6">
           <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-slate-500 font-black border-b border-white/5 pb-2 md:pb-4">
@@ -199,12 +205,12 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
         </div>
       )}
 
-      {/* E. Clinical Trials - Responsive Cards */}
+      {/* E. Clinical Trials - Grid Fix */}
       {hasTrials && (
         <div className="space-y-4 md:space-y-6">
           <div className="flex items-center gap-2 md:gap-4">
             <div className="h-px flex-1 bg-white/5" />
-            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-emerald-500/70 font-black">
+            <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-emerald-500/70 font-black">
               Clinical Investigations
             </p>
             <div className="h-px flex-1 bg-white/5" />
@@ -217,19 +223,24 @@ export default function MessageBubble({ msg, savedPapers, onToggleSave }) {
         </div>
       )}
 
-      {/* F. AI Analysis Report - Responsive Padding */}
+      {/* F. AI Analysis Report (Mobile Padding) */}
       {msg.text && (
-        <div className="bg-[#0d1117] border border-white/[0.06] rounded-[24px] md:rounded-[32px] p-5 md:p-10 shadow-2xl relative overflow-hidden">
+        <div className="bg-[#0d1117] border border-white/[0.06] rounded-[1.5rem] md:rounded-[32px] p-5 md:p-10 shadow-2xl relative overflow-hidden">
           <p className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-cyan-500 font-black mb-6 md:mb-8">
-            Expert Synthesis
+            Expert Intelligence Synthesis
           </p>
           <div className="prose prose-invert prose-slate max-w-none">
             <ReactMarkdown
               components={{
                 p: ({ children }) => (
-                  <p className="text-slate-400 text-[14px] md:text-[15px] leading-7 md:leading-8 mb-4">
+                  <p className="text-slate-400 text-[14px] md:text-[15px] leading-7 md:leading-8 mb-4 last:mb-0">
                     {children}
                   </p>
+                ),
+                strong: ({ children }) => (
+                  <strong className="text-cyan-100 font-bold bg-cyan-500/10 px-1 rounded">
+                    {children}
+                  </strong>
                 ),
                 h2: ({ children }) => (
                   <h2 className="text-slate-200 text-base md:text-lg font-bold mt-6 mb-3 border-l-4 border-cyan-500 pl-4">
